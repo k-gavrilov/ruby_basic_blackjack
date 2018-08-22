@@ -11,7 +11,7 @@ class Deck
     self
   end
 
-  def give_cards(number)
+  def retrieve_cards(number)
     return unless number <= card_buffer.size
     card_buffer.pop(number)
   end
