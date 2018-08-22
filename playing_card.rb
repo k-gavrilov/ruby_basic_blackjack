@@ -1,6 +1,8 @@
 class PlayingCard
   MIN_DIGNITY = 2
   MAX_DIGNITY = 14
+  MIN_SUIT = 0
+  MAX_SUIT = 3
   JACK = 11
   QUEEN = 12
   KING = 13
@@ -18,6 +20,12 @@ class PlayingCard
     @dignity = dignity
     @suit = suit
     # Add validations here
+  end
+
+  def self.each_unique_card
+    MIN_DIGNITY.upto(MAX_DIGNITY) do |dignity|
+      MIN_SUIT.upto(MAX_SUIT) { |suit| yield(dignity, suit) }
+    end
   end
 
   def to_s
