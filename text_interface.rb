@@ -20,6 +20,18 @@ module TextInterface
       end
     end
 
+    def enter_value(message, reg_exp)
+      loop do
+        puts message
+        user_input = gets.chomp
+        if user_input !~ reg_exp
+          puts "Enter value in requested format!"
+          next
+        end
+        return user_input
+      end
+    end
+
     def show_message(message)
       puts message
     end
