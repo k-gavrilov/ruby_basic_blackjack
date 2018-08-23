@@ -19,7 +19,7 @@ class PlayingBank
     true
   end
 
-  def show_info
+  def status
     players.map { |player, bank| "#{player}: #{bank}" }.join("\n").concat("\nCurrent bank: #{bank}")
   end
 
