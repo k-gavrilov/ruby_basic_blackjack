@@ -8,7 +8,7 @@ class PlayingBank
   end
 
   def make_bets
-    return unless players.values.reduce { |result, bank| result && bank >= default_bet }
+    return unless players.values.reduce(true) { |result, bank| result && bank >= default_bet }
     take_bets
   end
 
