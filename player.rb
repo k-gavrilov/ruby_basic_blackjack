@@ -3,9 +3,11 @@ require_relative 'text_interface.rb'
 
 class Player
   include TextInterface
+  ENTER_NAME = "Enter your name"
+  NON_EMPTY = /\S+/
 
-  def initialize(name)
-    @name = name
+  def initialize
+    @name = enter_value(ENTER_NAME, NON_EMPTY)
   end
 
   def make_decision(cards, options_str_arr, parameters)
