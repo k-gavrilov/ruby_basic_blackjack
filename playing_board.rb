@@ -17,6 +17,10 @@ class PlayingBoard
     players[player]
   end
 
+  def status
+    players.map { |player, cards| "#{player} cards: #{cards.each(&:to_s).join(" ")}"}.join("\n")
+  end
+
   private
 
   attr_reader :card_num, :deck, :players
