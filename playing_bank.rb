@@ -9,10 +9,16 @@ class PlayingBank
 
   def make_bets
     return unless players.values.reduce(true) { |result, bank| result && bank >= default_bet }
+    return unless bank.zero?
     take_bets
   end
 
   def win_bank(player)
+    if player.nil?
+      players.transform_values! { |v| v + default_bet }
+      self.bank = 0
+      return
+    end
     return unless players[player]
     players[player] += bank
     self.bank = 0
