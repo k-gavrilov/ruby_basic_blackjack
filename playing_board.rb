@@ -12,7 +12,8 @@ class PlayingBoard
 
   def pass_cards(player, number)
     players[player] ||= []
-    players[player].push(deck.retrieve_cards(number))
+    cards = deck.retrieve_cards(number)
+    cards.each { |card| players[player].push(card) }
   end
 
   def get_cards(player)
