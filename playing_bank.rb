@@ -25,6 +25,11 @@ class PlayingBank
     true
   end
 
+  def bankrupt
+    player_arr = players.find { |player, bank| bank < default_bet}
+    player_arr[0]
+  end
+
   def status
     players.map { |player, bank| "#{player}: #{bank}" }.join("\n").concat("\nCurrent bank: #{bank}")
   end
