@@ -6,6 +6,8 @@ class Player
   ENTER_NAME = "Enter your name"
   NON_EMPTY = /\S+/
 
+  attr_reader :name
+
   def initialize
     @name = enter_value(ENTER_NAME, NON_EMPTY)
   end
@@ -17,5 +19,9 @@ class Player
     cards_message = "Your cards are: " + cards.map(&:to_s).join(", ") + "\n"
     resulting_message = cards_message + score_message + message
     choose_option(resulting_message, options_str_arr)
+  end
+
+  def to_s
+    name
   end
 end
