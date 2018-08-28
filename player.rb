@@ -10,7 +10,7 @@ class Player
     @name = enter_value(ENTER_NAME, NON_EMPTY)
   end
 
-  def make_decision(cards, options_str_arr, parameters)
+  def make_decision(cards, options_str_arr, parameters = {})
     message = parameters[:message] || "Choose what to do:"
     score = parameters[:score]
     score_message = score ? "Your score is #{score}\n" : ""
