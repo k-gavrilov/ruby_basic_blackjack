@@ -1,3 +1,5 @@
+require_relative 'deck.rb'
+
 class PlayingBoard
   def initialize(players, parameters = {})
     @card_num = parameters[:card_num] || 2
