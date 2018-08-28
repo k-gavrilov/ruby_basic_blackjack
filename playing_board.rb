@@ -21,7 +21,7 @@ class PlayingBoard
   end
 
   def status
-    players.map { |player, cards| "#{player} cards: #{cards.each(&:to_s).join(" ")}"}.join("\n")
+    players.map { |player, cards| "#{player} cards: #{cards.each(&:to_s).join(' ')}" }.join("\n")
   end
 
   private
