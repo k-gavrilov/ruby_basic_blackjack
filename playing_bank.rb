@@ -26,7 +26,7 @@ class PlayingBank
   end
 
   def bankrupt
-    player_arr = players.find { |player, bank| bank < default_bet}
+    player_arr = players.find { |_player, bank| bank < default_bet }
     player_arr ? player_arr[0] : nil
   end
 
