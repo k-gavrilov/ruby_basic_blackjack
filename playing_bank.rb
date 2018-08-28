@@ -31,7 +31,7 @@ class PlayingBank
   end
 
   def status
-    players.map { |player, bank| "#{player}: #{bank}" }.join("\n").concat("\nCurrent bank: #{bank}")
+    "Bank status:\n" + players.map { |player, bank| "#{player}: #{bank}" }.join("\n")
   end
 
   protected
