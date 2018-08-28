@@ -3,7 +3,7 @@ require_relative 'text_interface.rb'
 
 class Player
   include TextInterface
-  ENTER_NAME = "Enter your name"
+  ENTER_NAME = "Enter your name".freeze
   NON_EMPTY = /\S+/
 
   attr_reader :name
