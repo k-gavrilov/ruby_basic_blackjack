@@ -40,6 +40,17 @@ class Player
     true
   end
 
+  def <=>(other)
+    return 0 if score == other.score
+    if score > 21 && other.score > 21
+      score < other.score ? 1 : -1
+    elsif score <= 21 && other.score <= 21
+      score > other.score ? 1 : -1
+    else
+      score < other.score ? 1 : -1
+    end
+  end
+
   def to_s
     name
   end
