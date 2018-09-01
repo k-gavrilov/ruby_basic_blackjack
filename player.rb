@@ -1,27 +1,57 @@
 require_relative 'playing_card.rb'
-require_relative 'text_interface.rb'
 
 class Player
-  include TextInterface
-  ENTER_NAME = "Enter your name".freeze
-  NON_EMPTY = /\S+/
+  attr_reader :name, :cards, :passes_num
 
-  attr_reader :name
-
-  def initialize
-    @name = enter_value(ENTER_NAME, NON_EMPTY)
+  def initialize(name)
+    @name = name
+    @cards = []
+    @passes_num = 0
   end
 
-  def make_decision(cards, options_str_arr, parameters = {})
-    message = parameters[:message] || "Choose what to do:"
-    score = parameters[:score]
-    score_message = score ? "Your score is #{score}\n" : ""
-    cards_message = "Your cards are: " + cards.map(&:to_s).join(", ") + "\n"
-    resulting_message = cards_message + score_message + message
-    choose_option(resulting_message, options_str_arr)
+  def take_cards(cards)
+    cards.each { |card| self.cards.push(card) }
+  end
+
+  def score
+    cards.reduce(0) do |sum, card|
+      sum + card_value(card, sum)
+    end
+  end
+
+  def cards_num
+    cards.size
+  end
+
+  def add_pass
+    self.passes_num += 1
+  end
+
+  def reset
+    self.cards = []
+    self.passes_num = 0
   end
 
   def to_s
     name
+  end
+
+  protected
+
+  attr_writer :passes_num, :cards
+
+  def card_value(card, sum)
+    case card.dignity
+    when 2..10
+      card.dignity
+    when 11..13
+      10
+    when 14
+      if sum < 21 && 21 - sum >= 11
+        11
+      else
+        1
+      end
+    end
   end
 end
