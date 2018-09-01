@@ -1,7 +1,7 @@
 require_relative 'playing_card.rb'
 
 class Player
-  attr_reader :name, :cards, :passes_num
+  attr_reader :cards, :passes_num
 
   def initialize(name)
     @name = name
@@ -32,12 +32,21 @@ class Player
     self.passes_num = 0
   end
 
+  def card_info
+    cards.each(&:to_s).join(" ")
+  end
+
+  def can_open?
+    true
+  end
+
   def to_s
     name
   end
 
   protected
 
+  attr_reader :name
   attr_writer :passes_num, :cards
 
   def card_value(card, sum)
