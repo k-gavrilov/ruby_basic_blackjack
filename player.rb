@@ -7,6 +7,7 @@ class Player
     @name = name
     @cards = []
     @passes_num = 0
+    @cards_opened = false
   end
 
   def take_cards(cards)
@@ -30,6 +31,7 @@ class Player
   def reset
     self.cards = []
     self.passes_num = 0
+    self.cards_opened = false
   end
 
   def card_info
@@ -38,6 +40,14 @@ class Player
 
   def can_open?
     true
+  end
+
+  def cards_opened?
+    cards_opened
+  end
+
+  def open_cards
+    self.cards_opened = true
   end
 
   def <=>(other)
@@ -59,6 +69,7 @@ class Player
 
   attr_reader :name
   attr_writer :passes_num, :cards
+  attr_accessor :cards_opened
 
   def card_value(card, sum)
     case card.dignity
