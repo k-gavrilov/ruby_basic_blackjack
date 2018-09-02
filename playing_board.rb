@@ -8,11 +8,18 @@ class PlayingBoard
     @deck = deck_class.new(card_class)
     @players = players
     players.each { |player| pass_cards(player, @card_num) }
+    @current_player_ref = 0
   end
 
   def pass_cards(player, number)
     return unless players.include?(player)
     player.take_cards(deck.retrieve_cards(number))
+  end
+
+  def next_player
+    result = players[current_player_ref]
+    increment_ref
+    result
   end
 
   def limit_reached?
@@ -32,6 +39,7 @@ class PlayingBoard
     deck.reset
     players.each(&:reset)
     players.each { |player| pass_cards(player, card_num) }
+    self.current_player_ref = 0
   end
 
   def scores_info
@@ -41,4 +49,9 @@ class PlayingBoard
   protected
 
   attr_reader :card_num, :deck, :players
+  attr_accessor :current_player_ref
+
+  def increment_ref
+    self.current_player_ref = (current_player_ref + 1) % players.size
+  end
 end
