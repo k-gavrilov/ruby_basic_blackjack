@@ -19,7 +19,7 @@ class PlayingCard
   def initialize(dignity, suit)
     @dignity = dignity
     @suit = suit
-    # Add validations here
+    validate!
   end
 
   def self.each_unique_card
@@ -32,5 +32,19 @@ class PlayingCard
     dignity_str = dignity.between?(2, 10) ? dignity.to_s : CARD_NAMES[dignity]
     suit_str = CARD_SUITS[suit]
     "#{dignity_str}#{suit_str}"
+  end
+
+  def validate!
+    raise "No Dignity Error" if dignity.nil?
+    raise "No Suit Error" if suit.nil?
+    raise "Dignity Range Error" unless dignity.between?(MIN_DIGNITY, MAX_DIGNITY)
+    raise "Suit Range Error" unless suit.between?(MIN_SUIT, MAX_SUIT)
+    return true
+  end
+
+  def valid?
+    validate!
+  rescue RuntimeError
+    false
   end
 end
