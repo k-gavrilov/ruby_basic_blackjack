@@ -20,7 +20,7 @@ class PlayingBoard
   end
 
   def status
-    players.map { |player| "#{player} cards: #{player.card_info}" }.join("\n")
+    players.map { |player| "#{player}'s cards: #{player.card_info}" }.join("\n")
   end
 
   def winner
@@ -32,6 +32,10 @@ class PlayingBoard
     deck.reset
     players.each(&:reset)
     players.each { |player| pass_cards(player, card_num) }
+  end
+
+  def scores_info
+    players.map { |player| "#{player}'s score - #{player.score} points" }.join("\n")
   end
 
   protected
