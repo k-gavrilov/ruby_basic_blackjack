@@ -26,6 +26,6 @@ class TextInterface
   end
 
   def show_message(message)
-    puts message
+    puts "#{message}\n\n"
   end
 end
