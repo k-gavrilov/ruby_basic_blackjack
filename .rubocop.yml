@@ -15,29 +15,15 @@ Style/ClassVars:
   Enabled: false
 
 Metrics/AbcSize:
-  Exclude:
-    - 'blackjack_game.rb'
   Max: 20
+  Exclude:
+    - 'player.rb'
 
 Metrics/MethodLength:
   Max: 15
 
 Metrics/ClassLength:
-  Exclude:
-    - 'blackjack_game.rb'
   Max: 110
 
 Metrics/LineLength:
   Max: 100
-
-Metrics/CyclomaticComplexity:
-  Exclude:
-    - 'blackjack_game.rb'
-
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'blackjack_game.rb'
-
-Style/Next:
-  Exclude:
-    - 'blackjack_game.rb'
