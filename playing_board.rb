@@ -31,6 +31,7 @@ class PlayingBoard
   def reset
     deck.reset
     players.each(&:reset)
+    players.each { |player| pass_cards(player, card_num) }
   end
 
   protected
