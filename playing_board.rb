@@ -6,25 +6,34 @@ class PlayingBoard
     card_class = parameters[:card_class] || PlayingCard
     deck_class = parameters[:deck_class] || Deck
     @deck = deck_class.new(card_class)
-    @players = {}
-    players.each { |player| @players[player] = @deck.retrieve_cards(2) }
+    @players = players
+    players.each { |player| pass_cards(player, @card_num) }
   end
 
   def pass_cards(player, number)
-    players[player] ||= []
-    cards = deck.retrieve_cards(number)
-    cards.each { |card| players[player].push(card) }
+    return unless players.include?(player)
+    player.take_cards(deck.retrieve_cards(number))
   end
 
-  def get_cards(player)
-    players[player]
+  def limit_reached?
+    players.reduce(true) { |result, player| result && player.cards_num >= 3 }
   end
 
   def status
-    players.map { |player, cards| "#{player} cards: #{cards.each(&:to_s).join(' ')}" }.join("\n")
+    players.map { |player| "#{player} cards: #{player.card_info}" }.join("\n")
   end
 
-  private
+  def winner
+    return nil if players.uniq(&:score).size <= 1
+    players.max
+  end
+
+  def reset
+    deck.reset
+    players.each(&:reset)
+  end
+
+  protected
 
   attr_reader :card_num, :deck, :players
 end
