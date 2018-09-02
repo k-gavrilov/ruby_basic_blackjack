@@ -53,11 +53,11 @@ class Player
   def <=>(other)
     return 0 if score == other.score
     if score > 21 && other.score > 21
-      score < other.score ? 1 : -1
+      compare_over_scores(score, other.score)
     elsif score <= 21 && other.score <= 21
-      score > other.score ? 1 : -1
+      compare_below_scores(score, other.score)
     else
-      score < other.score ? 1 : -1
+      compare_polar_scores(score, other.score)
     end
   end
 
@@ -70,6 +70,18 @@ class Player
   attr_reader :name
   attr_writer :passes_num, :cards
   attr_accessor :cards_opened
+
+  def compare_over_scores(first_score, second_score)
+    first_score < second_score ? 1 : -1
+  end
+
+  def compare_below_scores(first_score, second_score)
+    first_score > second_score ? 1 : -1
+  end
+
+  def compare_polar_scores(first_score, second_score)
+    first_score < second_score ? 1 : -1
+  end
 
   def card_value(card, sum)
     case card.dignity
