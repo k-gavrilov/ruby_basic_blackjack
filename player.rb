@@ -1,6 +1,8 @@
 require_relative 'playing_card.rb'
 
 class Player
+  COST_DIGNITY = %w[2 3 4 5 6 7 8 9 10].freeze
+  COST_10 = %w[J Q K].freeze
   attr_reader :cards, :passes_num
 
   def initialize(name)
@@ -85,16 +87,16 @@ class Player
 
   def card_value(card, sum)
     case card.dignity
-    when 2..10
-      card.dignity
-    when 11..13
-      10
-    when 14
+    when "A"
       if sum < 21 && 21 - sum >= 11
         11
       else
         1
       end
+    when *COST_DIGNITY
+      card.dignity.to_i
+    when *COST_10
+      10
     end
   end
 end

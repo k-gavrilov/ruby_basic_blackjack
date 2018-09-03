@@ -3,9 +3,7 @@ require_relative 'deck.rb'
 class PlayingBoard
   def initialize(players, parameters = {})
     @card_num = parameters[:card_num] || 2
-    card_class = parameters[:card_class] || PlayingCard
-    deck_class = parameters[:deck_class] || Deck
-    @deck = deck_class.new(card_class)
+    @deck = Deck.new
     @players = players
     players.each { |player| pass_cards(player, @card_num) }
     @current_player_ref = 0
